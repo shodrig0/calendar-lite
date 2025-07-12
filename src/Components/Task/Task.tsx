@@ -1,14 +1,22 @@
 import Title from "../Title/Title"
-import { Card, Typography } from "@mui/material"
+import AddTask from "../AddTask/AddTask"
+import { Typography, Sheet } from "@mui/joy"
+import { styled } from '@mui/material/styles'
+
+const ContainerTask = styled(Sheet)(({ theme }) => ({
+    width: '100%',
+    ...theme.typography.body2,
+    backgroundColor: 'black'
+}))
 
 const Task = () => {
     return (
         <>
             <Title title="Tasks" />
-            <Typography>Hola</Typography>
-            <Card variant="outlined">
-                no comprendoazaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            </Card>
+            <Typography>Create a task</Typography>
+            <ContainerTask>
+                <AddTask />
+            </ContainerTask>
         </>
     )
 }

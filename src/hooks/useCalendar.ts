@@ -1,5 +1,5 @@
 import * as React from "react"
-import { format, startOfToday, parse, eachDayOfInterval, endOfMonth, add, endOfWeek, startOfWeek, startOfMonth } from "date-fns"
+import { format, startOfToday, parse, eachDayOfInterval, endOfMonth, add, endOfWeek, startOfWeek, startOfMonth, eachHourOfInterval, endOfDay } from "date-fns"
 import type { UseCalendarReturn } from "../interfaces/UseCalendarReturn"
 
 export const useCalendar = (): UseCalendarReturn => {
@@ -14,6 +14,8 @@ export const useCalendar = (): UseCalendarReturn => {
 
     const startCalendar = startOfWeek(startOfMonth(startMonth))
     const endCalendar = endOfWeek(endOfMonth(startMonth))
+
+    const endDay = endOfDay(currentDay)
 
     const daysInMonth = eachDayOfInterval({
         start: startMonth,
@@ -30,6 +32,11 @@ export const useCalendar = (): UseCalendarReturn => {
         end: endCalendar
     })
 
+    const hoursInDay = eachHourOfInterval({
+        start: currentDay,
+        end: endDay
+    })
+
     const getPrevMonth = (event: React.MouseEvent<SVGSVGElement>) => {
         event.preventDefault()
         const firstDayPrevMonth = add(startMonth, { months: -1 })
@@ -42,5 +49,5 @@ export const useCalendar = (): UseCalendarReturn => {
         setCurrentMonth(format(firstDayNextMonth, 'yyyy-MM-dd'))
     }
 
-    return { startMonth, daysInMonth, getPrevMonth, getNextMonth, daysInWeek, allDaysInCalendar }
+    return { startMonth, daysInMonth, getPrevMonth, getNextMonth, daysInWeek, hoursInDay, allDaysInCalendar }
 }
