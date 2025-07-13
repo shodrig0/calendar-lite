@@ -8,7 +8,7 @@ const Day = () => {
 
     return (
         <>
-            <Card >
+            <Card variant="outlined">
                 <Grid display="flex" justifyContent="space-between" alignItems="center" size="grow">
                     <CardContent>
                         <Typography variant="h6">

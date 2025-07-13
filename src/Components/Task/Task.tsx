@@ -1,22 +1,22 @@
 import Title from "../Title/Title"
 import AddTask from "../AddTask/AddTask"
-import { Typography, Sheet } from "@mui/joy"
-import { styled } from '@mui/material/styles'
+import { Typography, Card } from "@mui/material"
+// import { styled } from '@mui/material/styles'
 
-const ContainerTask = styled(Sheet)(({ theme }) => ({
-    width: '100%',
-    ...theme.typography.body2,
-    backgroundColor: 'black'
-}))
+// const ContainerTask = styled(Card)(({ theme }) => ({
+//     width: '100%',
+//     ...theme.typography.body2,
+//     backgroundColor: 'black',
+// }))
 
 const Task = () => {
     return (
         <>
             <Title title="Tasks" />
             <Typography>Create a task</Typography>
-            <ContainerTask>
+            <Card variant="elevation" sx={{ width: '100%', maxWidth: '100%', margin: '0 auto', boxSizing: 'border-box' }}>
                 <AddTask />
-            </ContainerTask>
+            </Card>
         </>
     )
 }

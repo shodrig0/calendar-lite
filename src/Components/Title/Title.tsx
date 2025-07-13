@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Typography } from "@mui/joy"
+import { Typography } from "@mui/material"
 
 interface Props {
     title: string
@@ -7,7 +7,7 @@ interface Props {
 
 const Title: React.FC<Props> = ({ title }) => {
     return (
-        <Typography level="h2">{title}</Typography>
+        <Typography variant="h4">{title}</Typography>
     )
 }
 

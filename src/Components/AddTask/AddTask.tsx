@@ -1,38 +1,53 @@
 import * as React from "react"
-import { Modal, ModalDialog, ModalClose, Button, Stack } from "@mui/joy"
+import type { TaskType } from "../../types/task"
+import { Modal, Box, Typography, TextField, Card, TextareaAutosize } from "@mui/material"
 import { CalendarContext } from "../../contexts/CalendarContext"
-import { styled } from '@mui/material/styles'
 import { format } from 'date-fns'
-
-const DemoButton = styled(Button)(({ theme }) => ({
-    width: '100%',
-    ...theme.typography.body2,
-    textAlign: 'start',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    color: 'black',
-    cursor: 'text'
-}))
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import WatchLaterIcon from '@mui/icons-material/WatchLater'
+import EditNoteIcon from '@mui/icons-material/EditNote'
 
 const AddTask = () => {
     const [openModal, setOpenModal] = React.useState<boolean>(false)
+    const [tasks] = React.useState<TaskType[]>([])
     const calendar = React.useContext(CalendarContext)
+
+    // const calculateHeight = (duration: number) => {
+    //     const totalHeight = 1000
+    //     return `${(duration / 24) * totalHeight}`
+    // sx: top: calculateHeight(index), left: 0, <- typography hours
+    // sx: top: calculateHeight(task.time), height: calculateHeight(task.duration), <- box
+    // }
 
     return (
         <>
-            <Stack direction="column" spacing={1} sx={{ width: '100%', maxWidth: 500, margin: '0 auto' }}>
+            <Card
+                variant="outlined"
+                sx={{ position: 'relative', height: '50vh', textAlign: 'left', overflowY: 'auto' }}
+                onClick={() => setOpenModal(true)}
+            >
                 {calendar?.hoursInDay.map((date, index) => (
-                    <DemoButton onClick={() => setOpenModal(true)} key={index} variant="solid">
-                        {format(date, 'H')}
-                    </DemoButton>
+                    <Typography key={index} sx={{ borderBottom: '1px solid gray', px: 0.5, py: 1, cursor: 'crosshair' }}>
+                        {format(date, 'HH')}:00
+                    </Typography>
                 ))}
-            </Stack>
+
+                {tasks.map((task, index) => (
+                    <Box key={index} sx={{ position: 'absolute', backgroundColor: 'primary.500' }}>
+                        {task.title}
+                    </Box>
+                ))}
+
+            </Card>
 
             <Modal open={openModal} onClose={() => setOpenModal(false)}>
-                <ModalDialog>
-                    <ModalClose />
-                    Content
-                </ModalDialog>
+                <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, backgroundColor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4 }}>
+                    <TextField id="standard-basic" label="Add title" variant="standard" placeholder="Example 1" />
+                    <TextareaAutosize id="modal-modal-description" style={{ marginTop: 2, width: '75%', height: 20 }} maxRows={4} />
+                    <CheckCircleIcon />
+                    <WatchLaterIcon />
+                    <EditNoteIcon />
+                </Box>
             </Modal>
         </>
     )

@@ -1,5 +1,4 @@
-import { useMediaQuery } from "@mui/material"
-import { Box } from "@mui/joy"
+import { Box, useMediaQuery } from "@mui/material"
 import { styled } from "@mui/material/styles"
 import Calendar from "../Calendar/Calendar"
 import Day from "../Day/Day"
@@ -19,11 +18,10 @@ const Dashboard = () => {
 
     return (
         <>
-            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, flexWrap: 'wrap', gap: 2, width: '100%', textAlign: 'center', overflowX: 'hidden' }} >
+            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, flexWrap: 'wrap', gap: 2, width: '100%', textAlign: 'center', overflowX: 'hidden', alignItems: 'stretch' }} >
                 <DemoBox>
                     {mobileDisplay ? <Day /> : <Calendar />}
                 </DemoBox>
-
                 <DemoBox>
                     <Task />
                 </DemoBox>

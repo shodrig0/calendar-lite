@@ -1,5 +1,5 @@
 import * as React from "react"
-import { format, startOfToday, parse, eachDayOfInterval, endOfMonth, add, endOfWeek, startOfWeek, startOfMonth, eachHourOfInterval, endOfDay } from "date-fns"
+import { format, startOfToday, parse, eachDayOfInterval, endOfMonth, add, endOfWeek, startOfWeek, startOfMonth, eachHourOfInterval, endOfDay, addDays } from "date-fns"
 import type { UseCalendarReturn } from "../interfaces/UseCalendarReturn"
 
 export const useCalendar = (): UseCalendarReturn => {
@@ -13,7 +13,7 @@ export const useCalendar = (): UseCalendarReturn => {
     const endWeek = endOfWeek(startWeek)
 
     const startCalendar = startOfWeek(startOfMonth(startMonth))
-    const endCalendar = endOfWeek(endOfMonth(startMonth))
+    const endCalendar = addDays(startCalendar, 41)
 
     const endDay = endOfDay(currentDay)
 

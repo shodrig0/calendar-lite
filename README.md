@@ -1,3 +1,7 @@
 # Calendar Lite
 
-Work in Progress...
+### Stack
+
+- Vite
+- React
+- Material UI
