@@ -1,6 +1,6 @@
-export type TaskType = {
+export type TaskItem = {
     id: string
     title: string
-    time: number
-    duration: number
+    startTask: number
+    endTask: number
 }

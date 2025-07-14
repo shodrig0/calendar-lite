@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import * as React from "react"
 import { CalendarContext } from "../../contexts/CalendarContext"
 import { Typography, Box, Grid, Card, useMediaQuery } from "@mui/material"
 import { format, isToday } from "date-fns"
@@ -6,8 +6,18 @@ import Title from "../Title/Title"
 
 const Calendar = () => {
 
-    const calendar = useContext(CalendarContext)
+    const calendar = React.useContext(CalendarContext)
     const mobileDisplay = useMediaQuery('(max-width:1099px)')
+
+    const [isHovering, setIsHovering] = React.useState<number | null>(null)
+
+    const handleShowHover = (index: number) => {
+        setIsHovering(index)
+    }
+
+    const handleHideHover = () => {
+        setIsHovering(null)
+    }
 
     if (!calendar) return null // -> exit
 
@@ -35,9 +45,28 @@ const Calendar = () => {
 
                     {calendar.allDaysInCalendar.map((date, index) => {
                         const today = isToday(date)
+                        const isHovered = isHovering === index
+                        // fix Hover, add zoom or something
                         return (
-                            <Box key={`date-${index}`} sx={{ textAlign: 'center' }}>
-                                <Typography variant="body2" sx={{ display: 'inline-flex', justifyContent: 'center', alignItems: 'center', width: 25, color: today ? '#fff' : 'text.primary', backgroundColor: today ? 'primary.main' : 'transparent', borderRadius: '50%', cursor: 'default', fontWeight: today ? '500' : 'normal', p: 0.5, }}>
+                            <Box key={`date-${index}`} sx={{ textAlign: 'center', boxSizing: 'content-box' }}>
+                                <Typography
+                                    variant="body2"
+                                    onMouseEnter={() => handleShowHover(index)}
+                                    onMouseLeave={handleHideHover}
+                                    sx={{
+                                        display: 'inline-flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        width: 25,
+                                        color: today ? '#fff' : 'text.primary',
+                                        backgroundColor: today ? 'primary.main' : isHovered ? 'secondary.light' : 'transparent',
+                                        fontWeight: today ? '500' : 'normal',
+                                        borderRadius: '50%',
+                                        p: 0.5,
+                                        cursor: 'default',
+                                        transition: 'all 0.2s ease'
+                                    }}
+                                >
                                     {format(date, 'd')}
                                 </Typography>
                             </Box>

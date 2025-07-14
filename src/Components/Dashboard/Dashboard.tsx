@@ -18,7 +18,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, flexWrap: 'wrap', gap: 2, width: '100%', textAlign: 'center', overflowX: 'hidden', alignItems: 'stretch' }} >
+            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, flexWrap: 'wrap', gap: 2, width: '100%', textAlign: 'center', overflowX: 'hidden', alignItems: 'stretch', justifyContent: 'space-evenly' }} >
                 <DemoBox>
                     {mobileDisplay ? <Day /> : <Calendar />}
                 </DemoBox>
