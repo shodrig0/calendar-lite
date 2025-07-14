@@ -2,6 +2,7 @@ import * as React from "react"
 import { CalendarContext } from "../../contexts/CalendarContext"
 import { Typography, Box, Grid, Card, useMediaQuery } from "@mui/material"
 import { format, isToday } from "date-fns"
+// import { motion } from "framer-motion" // try to apply later
 import Title from "../Title/Title"
 
 const Calendar = () => {
@@ -28,7 +29,7 @@ const Calendar = () => {
     }
 
     return (
-        <>
+        < >
             <Title title="Calendar" />
             <Typography textAlign="center">
                 {format(calendar.startMonth, 'LLLL')}
